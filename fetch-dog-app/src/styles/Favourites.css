@@ -1,0 +1,15 @@
+.favorites {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .favorites ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .favorites li {
+    margin: 10px 0;
+  }
+  
