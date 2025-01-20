@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import SearchPage from './pages/SearchPage';
@@ -8,22 +8,37 @@ import FavoritesPage from './pages/FavouritesPage';
 import { Dog } from './types/types';
 
 const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  });
+
+  const [favorites, setFavorites] = useState<Dog[]>(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
   };
 
   const handleLogout = async () => {
     try {
       await logout(); // Call logout API
       setIsLoggedIn(false);
+      localStorage.removeItem('isLoggedIn');
     } catch (error) {
       console.error('Logout failed', error);
     }
   };
 
-  const [favorites, setFavorites] = useState<Dog[]>([]);
+  // const [favorites, setFavorites] = useState<Dog[]>([]);
 
   const handleFavoriteToggle = (dog: Dog) => {
     setFavorites((prevFavorites) =>
@@ -33,9 +48,20 @@ const App: React.FC = () => {
     );
   };
 
-  const handleRemoveFavorite = (dogToRemove: Dog) => {
-    setFavorites((prevFavorites) => prevFavorites.filter(dog => dog.id !== dogToRemove.id));
-  };
+  // const handleRemoveFavorite = (dogToRemove: Dog) => {
+  //   setFavorites((prevFavorites) => prevFavorites.filter(dog => dog.id !== dogToRemove.id));
+  // };
+  // const handleAddFavorite = (dog: Dog) => {
+  //   const updatedFavorites = [...favorites, dog];
+  //   setFavorites(updatedFavorites);
+  //   localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  // };
+  
+  // const handleRemoveFavorite = (dog: Dog) => {
+  //   const updatedFavorites = favorites.filter(fav => fav.id !== dog.id);
+  //   setFavorites(updatedFavorites);
+  //   localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  // };  
 
 
   return (
@@ -45,7 +71,7 @@ const App: React.FC = () => {
         <Route path="/" element={!isLoggedIn ? <LoginForm onLogin={handleLogin} /> : <Navigate to="/search" />} />
         <Route path="/search" element={isLoggedIn ? <SearchPage favorites={favorites} onFavoriteToggle={handleFavoriteToggle} /> : <Navigate to="/" />} />
         <Route path="/favorites" element={isLoggedIn ? <FavoritesPage favorites={favorites} 
-        onRemoveFavorite={handleRemoveFavorite} /> : <Navigate to="/" />} />
+        onRemoveFavorite={handleFavoriteToggle} /> : <Navigate to="/" />} />
       </Routes>
     </Router>
   );

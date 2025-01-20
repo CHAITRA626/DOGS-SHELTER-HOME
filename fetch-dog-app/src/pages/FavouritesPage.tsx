@@ -38,9 +38,12 @@ const FavoritesPage: React.FC<FavoritesPageProps> = ({ favorites, onRemoveFavori
                 <DogCard dog={matchedDog} onFavoriteToggle={onRemoveFavorite} isFavorite={true} />
                 </div>
             )}
-            <button onClick={handleFindMatch} className="find-match-button">
-                Find a Match
-            </button>
+            {favorites && favorites.length > 0 ?
+                <button onClick={handleFindMatch} className="find-match-button">
+                    Find a Match
+                </button> :
+                <div>You have no favorites!</div>
+            }
         </div>
     );
 };
