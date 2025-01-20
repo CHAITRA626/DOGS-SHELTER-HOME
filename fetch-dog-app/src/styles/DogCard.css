@@ -1,22 +1,43 @@
 .dog-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 250px; 
+  height: 350px; 
+  text-align: center;
   
-  .dog-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .dog-card h3 {
-    margin: 10px 0;
-    font-size: 20px;
-  }
-  
-  .dog-card p {
-    margin: 5px 0;
-  }
-  
+}
+
+.dog-img {
+  width: 100%; 
+  height: 220px; 
+  max-height: 220px;
+  min-height: 220px;
+  object-fit: cover; 
+  border-radius: 4px;
+}
+
+.dog-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.dog-breed, .dog-age, .dog-zip-code {
+  font-size: 15px;
+  margin: 10px;
+  color: gray;
+  font-weight: bold;
+  text-align: left;
+}
+
+.zipcode-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -15px;
+}

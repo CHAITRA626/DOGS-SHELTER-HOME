@@ -1,63 +1,80 @@
-/* Login Page
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+#login-container {
+  background-image: url('../assets/wallpaper.jpg');
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+  background-size: 100% 130vh;
+  background-position: top;
+  height: 100vh; /* Ensure the background covers the full viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-wrapper {
+  width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h1 {
     text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
   }
-  
-  .login-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .login-form {
+
+  form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 300px;
+    gap: 1rem;
   }
-  
-  .input-field {
-    padding: 10px;
-    font-size: 16px;
+
+  input {
+    padding: 0.8rem;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    outline: none;
   }
-  
-  .submit-button {
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-button:hover {
-    background-color: #45a049;
-  }
-   */
 
-   .login {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  input:focus {
+    border-color: #333;
   }
-  
-  .login input {
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 100%;
-  }
-  
-  .login button {
-    padding: 10px 20px;
-    background-color: #007bff;
+
+  button {
+    padding: 1rem;
+    background-color: #333;
     color: white;
     border: none;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
   }
-  
+
+  button:hover {
+    background-color: #666;
+  }
+
+  button:disabled {
+    background-color: #c6c6c6;
+    cursor: not-allowed;
+  }
+
+  .error-msg {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #login-wrapper {
+    width: 260px;
+  }
+}

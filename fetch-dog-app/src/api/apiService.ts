@@ -8,6 +8,10 @@ export const login = (name: string, email: string) => {
   return axios.post(`${BASE_URL}/auth/login`, { name, email });
 };
 
+export const logout = () => {
+  return axios.post(`${BASE_URL}/auth/logout`);
+};
+
 export const getBreeds = () => {
   return axios.get(`${BASE_URL}/dogs/breeds`);
 };

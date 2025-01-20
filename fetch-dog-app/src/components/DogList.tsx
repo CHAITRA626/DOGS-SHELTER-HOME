@@ -1,56 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { searchDogs } from '../api/apiService';
 import DogCard from './DogCard';
+import { Dog } from '../types/types';
+import { getDogsByIds } from '../api/apiService';
+import '../styles/DogList.css';
 
-const DogList: React.FC = () => {
-  const [dogs, setDogs] = useState([]);
-  const [breed, setBreed] = useState('');
-  const [page, setPage] = useState(0);
+interface DogListProps {
+  dogIds: string[];
+  onFavoriteToggle: (dog: Dog) => void;
+  favorites: Dog[];
+}
+
+const DogList: React.FC<DogListProps> = ({ dogIds, onFavoriteToggle, favorites }) => {
+  const [dogs, setDogs] = useState<Dog[]>([]);
 
   useEffect(() => {
-    const fetchDogs = async () => {
+    const fetchData = async () => {
+      if (dogIds.length > 0) {
         try {
-          const response = await searchDogs({ breeds: breed ? [breed] : [], size: 10, from: page * 10 });
-          setDogs(response.data.resultIds);
+          const fetchedDogs = await getDogsByIds(dogIds);
+          setDogs(fetchedDogs.data);
         } catch (error) {
-          console.error('Failed to fetch dogs', error);
+          console.error('Error fetching dogs:', error);
         }
+      }
     };
-    fetchDogs();
-  }, [breed, page]);
+    fetchData();
+  }, [dogIds]);
 
   return (
-    <div>
-      <input type="text" placeholder="Filter by breed" value={breed} onChange={(e) => setBreed(e.target.value)} />
-      <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
-      <div>{dogs.map((dogId) => <DogCard key={dogId} dogId={dogId} />)}</div>
+    <div className="dog-list">
+      {dogs.map((dog) => (
+        <DogCard key={dog.id} dog={dog} onFavoriteToggle={onFavoriteToggle}
+        isFavorite={favorites.some(favDog => favDog.id === dog.id)}/>
+      ))}
     </div>
   );
 };
 
 export default DogList;
-// import React from 'react';
-// import DogCard from './DogCard';
-
-// interface DogListProps {
-//   dogs: Array<{
-//     id: string;
-//     name: string;
-//     breed: string;
-//     age: number;
-//     img: string;
-//     zip_code: string;
-//   }>;
-// }
-
-// const DogList: React.FC<DogListProps> = ({ dogs }) => {
-//   return (
-//     <div className="dog-list">
-//       {dogs.map((dog) => (
-//         <DogCard key={dog.id} {...dog} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default DogList;
