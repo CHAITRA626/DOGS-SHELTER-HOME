@@ -3,6 +3,8 @@ import DogCard from '../components/DogCard';
 import { Dog } from '../types/types';
 import '../styles/FavoritesPage.css';
 import { matchDogs } from '../api/apiService';
+import Confetti from 'react-confetti';
+
 
 interface FavoritesPageProps {
   favorites: Dog[];
@@ -21,6 +23,9 @@ const FavoritesPage: React.FC<FavoritesPageProps> = ({ favorites, onRemoveFavori
           }
         } catch (error) {
           console.error('Error finding match:', error);
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('favorites');
+          window.location.href = '/';
         }
     };
     return(
@@ -34,6 +39,7 @@ const FavoritesPage: React.FC<FavoritesPageProps> = ({ favorites, onRemoveFavori
             )}
             {matchedDog && (
                 <div className="matched-dog">
+                <Confetti />
                 <h3>Your Match</h3>
                 <DogCard dog={matchedDog} onFavoriteToggle={onRemoveFavorite} isFavorite={true} />
                 </div>

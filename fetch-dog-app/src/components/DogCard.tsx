@@ -4,6 +4,7 @@ import '../styles/DogCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 interface DogCardProps {
   dog: Dog;
@@ -13,14 +14,20 @@ interface DogCardProps {
 
 const DogCard: React.FC<DogCardProps> = ({ dog, onFavoriteToggle, isFavorite }) => {
   const [favorite, setFavorite] = useState(isFavorite);
+  const navigate = useNavigate();
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setFavorite(!favorite);
     onFavoriteToggle(dog);
   };
 
+  const handleCardClick = () => {
+    navigate(`/dog/${dog.id}`, { state: { dog } });
+  };
+
   return (
-    <div className="dog-card">
+    <div className="dog-card" onClick={handleCardClick}>
       <img src={dog.img} alt={dog.name} className="dog-img" />
       <h3 className="dog-name">{dog.name}</h3>
       <p className="dog-breed"><strong>{dog.breed}</strong></p>

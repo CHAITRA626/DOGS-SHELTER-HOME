@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../styles/FilterBar.css'; // Import the CSS file
+import React, { useState, useEffect, useRef } from 'react';
+import '../styles/FilterBar.css';
 
 interface FilterBarProps {
   breeds: string[];
@@ -11,8 +11,8 @@ const FilterBar: React.FC<FilterBarProps> = ({ breeds, onFilterChange }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [temporarySelection, setTemporarySelection] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Handle checkbox selection
   const handleCheckboxChange = (breed: string) => {
     if (temporarySelection.includes(breed)) {
       setTemporarySelection(temporarySelection.filter(item => item !== breed));
@@ -21,45 +21,56 @@ const FilterBar: React.FC<FilterBarProps> = ({ breeds, onFilterChange }) => {
     }
   };
 
-  // Apply button handler
   const handleApply = () => {
     setSelectedBreeds(temporarySelection);
-    onFilterChange({ breeds: temporarySelection});
-    setIsDropdownVisible(false); // Hide dropdown after applying
+    onFilterChange({ breeds: temporarySelection });
+    setIsDropdownVisible(false);
   };
 
-  // Reset button handler
   const handleReset = () => {
     console.log(selectedBreeds);
     setTemporarySelection([]);
     setSelectedBreeds([]);
-    onFilterChange({breeds: []});
+    onFilterChange({ breeds: [] });
     setIsDropdownVisible(false);
   };
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => setIsDropdownVisible(!isDropdownVisible);
 
-  // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  // Filter the breeds based on the search term
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownVisible]);
+
   const filteredBreeds = breeds.filter(breed =>
     breed.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="filter-bar">
-      {/* Dropdown trigger */}
+    <div className="filter-bar" ref={dropdownRef}>
       <button onClick={toggleDropdown} className="dropdown-trigger">
         Select Breeds
       </button>
 
       {isDropdownVisible && (
         <div className="dropdown">
-          {/* Search input */}
           <input
             type="text"
             placeholder="Search breeds..."

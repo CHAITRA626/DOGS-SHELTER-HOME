@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import SearchPage from './pages/SearchPage';
+import DogDetailPage from './pages/DogDetailPage';
+import AdoptForm from './pages/AdoptForm';
 import NavBar from './components/NavBar';
 import { logout } from './api/apiService'; // Import the login function
 import FavoritesPage from './pages/FavouritesPage';
@@ -33,8 +35,12 @@ const App: React.FC = () => {
       await logout(); // Call logout API
       setIsLoggedIn(false);
       localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('favorites');
     } catch (error) {
       console.error('Logout failed', error);
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('favorites');
+      window.location.href = '/';
     }
   };
 
@@ -72,6 +78,8 @@ const App: React.FC = () => {
         <Route path="/search" element={isLoggedIn ? <SearchPage favorites={favorites} onFavoriteToggle={handleFavoriteToggle} /> : <Navigate to="/" />} />
         <Route path="/favorites" element={isLoggedIn ? <FavoritesPage favorites={favorites} 
         onRemoveFavorite={handleFavoriteToggle} /> : <Navigate to="/" />} />
+        <Route path="/dog/:id" element={isLoggedIn ? <DogDetailPage /> : <Navigate to="/" />} />
+        <Route path="/adopt/:id" element={isLoggedIn ? <AdoptForm /> : <Navigate to="/" /> } />
       </Routes>
     </Router>
   );

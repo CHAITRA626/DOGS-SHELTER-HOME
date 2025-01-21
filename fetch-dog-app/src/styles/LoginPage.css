@@ -1,10 +1,9 @@
 #login-container {
   background-image: url('../assets/wallpaper.jpg');
-  /* background-size: cover; */
   background-repeat: no-repeat;
   background-size: 100% 130vh;
   background-position: top;
-  height: 100vh; /* Ensure the background covers the full viewport */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +57,7 @@
   }
 
   button:hover {
-    background-color: #666;
+    background-color: #555;
   }
 
   button:disabled {

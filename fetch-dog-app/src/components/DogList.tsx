@@ -21,6 +21,9 @@ const DogList: React.FC<DogListProps> = ({ dogIds, onFavoriteToggle, favorites }
           setDogs(fetchedDogs.data);
         } catch (error) {
           console.error('Error fetching dogs:', error);
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('favorites');
+          window.location.href = '/';
         }
       }
     };

@@ -1,0 +1,119 @@
+.adopt-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin:1em;
+    margin-top:3em;
+}
+
+  
+.adopt-wrapper img {
+    width: 30%;
+    max-width: 450px;
+    max-height: 450px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 2em;
+}
+
+.adopt-form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.adopt-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.adopt-form input:focus {
+    outline: none;
+}
+
+.adopt-form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.adopt-form button:hover {
+    background-color: #555;
+}
+
+.adopt-form h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.thank-you-message {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.thank-you-message h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.thank-you-message p {
+    font-size: 16px;
+    color: #555;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1200px) {
+    .adopt-wrapper {
+        flex-direction: column;
+        margin:0;
+        margin-top: 1em;
+    }
+
+    .adopt-wrapper img {
+        width: calc(100% - 20px);
+        margin-right:0;
+        margin-bottom: 2em;
+    }
+
+    .adopt-form {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .adopt-form {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+}

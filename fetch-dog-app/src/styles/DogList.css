@@ -1,7 +1,7 @@
 .dog-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
-  gap: 20px; /* Space between the cards */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px; 
   padding: 20px;
   align-items: center;
   margin: auto;
@@ -10,8 +10,107 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .search-sort-container{
   margin:1em;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.dropdown-container {
+  position: relative;
+    width: 270px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1.5px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -1em;
+}
+
+.dropdown-container select {
+  width: 100%;
+  border: none;
+  padding: 9px 6px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #333;
+  border: none;
+  background-color: #fff;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-container select:focus {
+  background-color: #fff;
+  border-color: 1.5px solid #ddd;
+} 
+
+*:focus {
+  outline: 0;
+}
+
+.age-filter-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.age-filter-container input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #333;
+  background-color: #fff;
+  text-align: left;
+  margin-right: 2em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100px;
+  margin-bottom: 0em;
+  margin-top: 0em;
+}
+
+.age-filter-container label {
+  font-size: 14px;
+}
+
+@media (max-width: 1200px) {
+  .dog-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .age-filter-container input {
+    width: 50px;
+    margin-right: 5px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 950px) {
+  .dog-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .search-sort-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .dog-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .dropdown-container {
+    margin-top: 0em;
+  }
+}
+
+@media (max-width: 950px) and (min-width: 900px) {
+  .dropdown-container {
+    margin-top: 0em;
+  }
 }

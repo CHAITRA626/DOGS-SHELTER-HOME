@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/Pagination.css'
+import React, { useState, useEffect } from 'react';
+import '../styles/Pagination.css';
 
 interface PaginationProps {
   total: number;
@@ -10,10 +10,18 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ total, size, currentPage, onPageChange }) => {
   const pages = Math.ceil(total / size);
+  const [inputPage, setInputPage] = useState(currentPage + 1);
 
-  // Navigate to a specific page
+  useEffect(() => {
+    setInputPage(currentPage + 1);
+  }, [currentPage]);
+
   const handlePageChange = (page: number) => {
-    onPageChange(page * size);
+    if (page >= 0 && page < pages) {
+      onPageChange(page * size);
+    } else {
+      onPageChange(0); 
+    }
   };
 
   const handleNext = () => {
@@ -28,44 +36,48 @@ const Pagination: React.FC<PaginationProps> = ({ total, size, currentPage, onPag
     }
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputPage(value ? parseInt(value, 10) : 0);
+  };
+
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handlePageChange(inputPage - 1);
+    }
+  };
+
+  const handleInputBlur = () => {
+    handlePageChange(inputPage - 1);
+  };
+
   return (
     <div className="pagination">
-
-      {/* First Page Button */}
-      <button
-        disabled={currentPage === 0}
-        onClick={() => handlePageChange(0)}
-      >
+      <button disabled={currentPage === 0} onClick={() => handlePageChange(0)}>
         &lt;&lt;
       </button>
-
-      {/* Previous Button */}
-      <button
-        disabled={currentPage === 0}
-        onClick={handlePrevious}
-      >
+      <button disabled={currentPage === 0} onClick={handlePrevious}>
         &lt;
       </button>
+      <span>Page </span>
+      <input
+        type="number"
+        value={inputPage}
+        onChange={handleInputChange}
+        onKeyDown={handleInputKeyDown}
+        onBlur={handleInputBlur}
+        min="1"
+        max={pages}
+        className="page-input"
+      />
+      <span> of {pages}</span>
 
-      {/* Current Page */}
-      <span>{currentPage + 1} of {pages}</span>
-
-      {/* Next Button */}
-      <button
-        disabled={currentPage === pages - 1}
-        onClick={handleNext}
-      >
+      <button disabled={currentPage === pages - 1} onClick={handleNext}>
         &gt;
       </button>
-
-      {/* Last Page Button */}
-      <button
-        disabled={currentPage === pages - 1}
-        onClick={() => handlePageChange(pages - 1)}
-      >
+      <button disabled={currentPage === pages - 1} onClick={() => handlePageChange(pages - 1)}>
         &gt;&gt;
       </button>
-
     </div>
   );
 };
