@@ -5,12 +5,11 @@ import SearchPage from './pages/SearchPage';
 import DogDetailPage from './pages/DogDetailPage';
 import AdoptForm from './pages/AdoptForm';
 import NavBar from './components/NavBar';
-import { logout } from './api/apiService'; // Import the login function
+import { logout } from './api/apiService'; 
 import FavoritesPage from './pages/FavouritesPage';
 import { Dog } from './types/types';
 
 const App: React.FC = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
@@ -32,7 +31,7 @@ const App: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await logout(); // Call logout API
+      await logout(); 
       setIsLoggedIn(false);
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('favorites');
@@ -44,8 +43,6 @@ const App: React.FC = () => {
     }
   };
 
-  // const [favorites, setFavorites] = useState<Dog[]>([]);
-
   const handleFavoriteToggle = (dog: Dog) => {
     setFavorites((prevFavorites) =>
       prevFavorites.some((favDog) => favDog.id === dog.id)
@@ -53,22 +50,6 @@ const App: React.FC = () => {
         : [...prevFavorites, dog]
     );
   };
-
-  // const handleRemoveFavorite = (dogToRemove: Dog) => {
-  //   setFavorites((prevFavorites) => prevFavorites.filter(dog => dog.id !== dogToRemove.id));
-  // };
-  // const handleAddFavorite = (dog: Dog) => {
-  //   const updatedFavorites = [...favorites, dog];
-  //   setFavorites(updatedFavorites);
-  //   localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  // };
-  
-  // const handleRemoveFavorite = (dog: Dog) => {
-  //   const updatedFavorites = favorites.filter(fav => fav.id !== dog.id);
-  //   setFavorites(updatedFavorites);
-  //   localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  // };  
-
 
   return (
     <Router>

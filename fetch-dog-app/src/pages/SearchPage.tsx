@@ -61,11 +61,6 @@ const SearchPage: React.FC<SearchPageProps> = ({ favorites, onFavoriteToggle }) 
     setQueryParams({ ...queryParams, sort, from: 0 });
   };
 
-  // const handleSizeChange = (newSize: number) => {
-  //   setCurrentPage(0);
-  //   setQueryParams({ ...queryParams, size: newSize, from: 0 });
-  // };
-
   const handleSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newSize = parseInt(event.target.value, 10);
     setCurrentPage(0);
