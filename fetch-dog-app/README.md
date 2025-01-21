@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# Fetch Me If You Can - Dog Shelter Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application to help users find and adopt dogs from a shelter. Users can log in, search for dogs, sort and filter by breed, age, or name, view dog details, and submit an adoption application.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication**: Users can log in using their name and email.
+- **Dog Search**: Search for dogs by breed, name, and other details.
+- **Dog Sorting**: Sort dogs by breed, name, or age in ascending or descending order.
+- **Pagination**: Navigate through pages of dog listings.
+- **Favorites**: Users can add and view favorite dogs.
+- **Adoption Form**: Submit an adoption application for a dog.
+- **Responsive Design**: Optimized for desktop and mobile views.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**:
+  - React
+  - TypeScript
+  - React Router
+  - Axios (for API calls)
+  - Confetti (for success animation)
+  - CSS Modules for styling
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Backend**:
+  - Node.js (for handling backend logic, though this may need to be implemented in future)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (v14 or later)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Steps to Run the Project Locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/CHAITRA626/DOGS-SHELTER-HOME
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate into the project directory:
+    ```bash
+    cd fetch-dog-app
 
-### `npm run eject`
+3. Run the application:
+    ```bash
+    npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The app should now be running at http://localhost:3000.
+Feel free to modify it based on any changes or specific details you need.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
