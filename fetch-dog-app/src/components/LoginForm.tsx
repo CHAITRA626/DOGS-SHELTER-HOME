@@ -19,7 +19,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email); // Validates the email format
+    return emailRegex.test(email); 
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
